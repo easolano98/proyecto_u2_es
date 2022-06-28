@@ -1,20 +1,22 @@
 package com.uce.edu.demo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.service.IPersonaJdbcService;
-import com.uce.edu.demo.to.Persona;
+import com.uce.edu.demo.estudiante.service.IEstudianteJdbcService;
+import com.uce.edu.demo.estudiante.to.Estudiante;
 
 @SpringBootApplication
 public class ProyectoU2EsApplication implements CommandLineRunner{
+	private static final Logger LOGGER = Logger.getLogger(ProyectoU2EsApplication.class);
 	@Autowired
-	private IPersonaJdbcService jdbcService;
-	private static final Logger LOGGER = LoggerFactory.getLogger(ProyectoU2EsApplication.class);
+	private IEstudianteJdbcService estudianteJdbcService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2EsApplication.class, args);
 	}
@@ -22,28 +24,34 @@ public class ProyectoU2EsApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-	
-		Persona persona=new Persona();
-		persona.setId(3);
-		persona.setNombre("Teodoro");
-		persona.setApellido("Casa");
-		//Insertar
-		//this.jdbcService.guardar(persona);
 		
-		Persona persona1=new Persona();
-		persona1.setId(2);
-		persona1.setNombre("Pepito");
-		persona1.setApellido("Velez");
+		Estudiante estudiante=new Estudiante();
+		estudiante.setNumCarnet(2);
+		estudiante.setCedula("1723050613");
+		estudiante.setNombre("Josue");
+		estudiante.setApellido("Espinel");
+		estudiante.setCarrera("Odontologia");
+		
+		//Insertar
+		this.estudianteJdbcService.ingresar(estudiante);
+		
+		Estudiante estudiante1=new Estudiante();
+		estudiante1.setNumCarnet(4);
+		estudiante1.setCedula("1750015205");
+		estudiante1.setNombre("Erick");
+		estudiante1.setApellido("Solano");
+		estudiante1.setCarrera("Arquitectura");
 		
 		//Actualizar
-		//this.jdbcService.actualizar(persona1);
-	
+		this.estudianteJdbcService.actualizar(estudiante1);
+		
 		//Borrar
-		//this.jdbcService.eliminar(2);
+		this.estudianteJdbcService.borrar("1720220405");
 		
 		//Buscar
-		Persona per=this.jdbcService.buscarPorId(3);
-		LOGGER.info(null);
+		Estudiante estd=this.estudianteJdbcService.buscar(4);
+		
+		LOGGER.info(estd);
 	}
 
 }
