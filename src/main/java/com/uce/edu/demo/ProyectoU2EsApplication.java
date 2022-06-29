@@ -8,14 +8,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.estudiante.service.IEstudianteJdbcService;
-import com.uce.edu.demo.estudiante.to.Estudiante;
+import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
 public class ProyectoU2EsApplication implements CommandLineRunner{
 	private static final Logger LOGGER = Logger.getLogger(ProyectoU2EsApplication.class);
+	
 	@Autowired
-	private IEstudianteJdbcService estudianteJdbcService;
+	private IPersonaJpaService jpaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2EsApplication.class, args);
@@ -24,34 +25,28 @@ public class ProyectoU2EsApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
+	
+		LOGGER.info(this.jpaService.buscarPorId(3));
 		
-		Estudiante estudiante=new Estudiante();
-		estudiante.setNumCarnet(2);
-		estudiante.setCedula("1723050613");
-		estudiante.setNombre("Josue");
-		estudiante.setApellido("Espinel");
-		estudiante.setCarrera("Odontologia");
+		Persona per=new Persona();
+		per.setId(8);
+		per.setNombre("Wilson");
+		per.setApellido("Tipan");
 		
-		//Insertar
-		this.estudianteJdbcService.ingresar(estudiante);
+		//GUARDAR
+		//this.jpaService.guardar(per);
 		
-		Estudiante estudiante1=new Estudiante();
-		estudiante1.setNumCarnet(4);
-		estudiante1.setCedula("1750015205");
-		estudiante1.setNombre("Erick");
-		estudiante1.setApellido("Solano");
-		estudiante1.setCarrera("Arquitectura");
+		Persona per1=new Persona();
+		per1.setId(8);
+		per1.setNombre("Wilsona");
+		per1.setApellido("Tipantaxi");
 		
-		//Actualizar
-		this.estudianteJdbcService.actualizar(estudiante1);
+		//ACTUALIZAR
+		this.jpaService.actualizar(per1);
 		
-		//Borrar
-		this.estudianteJdbcService.borrar("1720220405");
-		
-		//Buscar
-		Estudiante estd=this.estudianteJdbcService.buscar(4);
-		
-		LOGGER.info(estd);
+		//ELIMINAR
+		this.jpaService.eliminar(3);
+	
 	}
 
 }
