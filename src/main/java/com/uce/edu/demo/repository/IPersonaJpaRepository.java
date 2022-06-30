@@ -7,4 +7,6 @@ public interface IPersonaJpaRepository {
 	public void insertar(Persona persona);
 	public void actualizar(Persona persona);
 	public void eliminar(Integer id);
+	
+	
 }

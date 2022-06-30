@@ -1,14 +1,14 @@
 package com.uce.edu.demo.estudiante.repository;
 
-import com.uce.edu.demo.estudiante.to.Estudiante;
+import com.uce.edu.demo.estudiante.to.EstudianteTo;
 
 public interface IEstudianteJdbcRepository {
 
-	public void insertar(Estudiante e);
+	public void insertar(EstudianteTo e);
 
-	public Estudiante buscar(int numCarnet);
+	public EstudianteTo buscar(int numCarnet);
 
-	public void actualizar(Estudiante e);
+	public void actualizar(EstudianteTo e);
 
 	public void eliminar(String cedula);
 }

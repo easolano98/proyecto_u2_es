@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.ProyectoU2EsApplication;
-import com.uce.edu.demo.estudiante.to.Estudiante;
+import com.uce.edu.demo.estudiante.to.EstudianteTo;
 
 @Repository
 public class EstudianteJdbcRepositoryImpl implements IEstudianteJdbcRepository {
@@ -17,7 +17,7 @@ public class EstudianteJdbcRepositoryImpl implements IEstudianteJdbcRepository {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void insertar(Estudiante estudiante) {
+	public void insertar(EstudianteTo estudiante) {
 		// TODO Auto-generated method stub
 		this.jdbcTemplate.update(
 				"insert into estudiante (num_carnet, cedula, nombre, apellido, carrera) values (?,?,?,?,?)",
@@ -27,15 +27,15 @@ public class EstudianteJdbcRepositoryImpl implements IEstudianteJdbcRepository {
 	}
 
 	@Override
-	public Estudiante buscar(int numCarnet) {
+	public EstudianteTo buscar(int numCarnet) {
 		// TODO Auto-generated method stub
 		return this.jdbcTemplate.queryForObject("select * from estudiante where num_carnet=?", new Object[] { numCarnet },
-				new BeanPropertyRowMapper<Estudiante>(Estudiante.class));
+				new BeanPropertyRowMapper<EstudianteTo>(EstudianteTo.class));
 		
 	}
 
 	@Override
-	public void actualizar(Estudiante estudiante) {
+	public void actualizar(EstudianteTo estudiante) {
 		// TODO Auto-generated method stub
 		this.jdbcTemplate.update("update estudiante set cedula=?,nombre=?,apellido=?,carrera=? where num_carnet=?",
 				new Object[] { estudiante.getCedula(), estudiante.getNombre(), estudiante.getApellido(),

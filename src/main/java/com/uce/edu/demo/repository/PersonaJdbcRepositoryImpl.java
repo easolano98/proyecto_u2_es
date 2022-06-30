@@ -51,7 +51,7 @@ public class PersonaJdbcRepositoryImpl implements IPersonaJdbcRepository {
 	@Override
 	public List<PersonaTo> buscarTodos() {
 		// TODO Auto-generated method stub
-		return this.jdbcTemplate.query("select * from persona", new PersonaRowMapper() );
+		return this.jdbcTemplate.query("select * from persona", new PersonaRowMapper());
 		
 	}
 	class PersonaRowMapper implements RowMapper<PersonaTo>{

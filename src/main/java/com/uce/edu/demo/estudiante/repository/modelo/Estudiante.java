@@ -1,25 +1,27 @@
-package com.uce.edu.demo.estudiante.to;
+package com.uce.edu.demo.estudiante.repository.modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Estudiante {
+	
+	@Id
+	@Column(name="num_carnet")
+	private Integer numCarnet;
+	@Column(name="cedula")
 	private String cedula;
+	@Column(name="nombre")
 	private String nombre;
+	@Column(name="apellido")
 	private String apellido;
-	private int numCarnet;
+	@Column(name="carrera")
 	private String carrera;
 	
-	public Estudiante() {
-		
-	}
 	
-	
-	public Estudiante(String cedula, String nombre, String apellido, int numCarnet, String carrera) {
-		super();
-		this.cedula = cedula;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.numCarnet = numCarnet;
-		this.carrera = carrera;
-	}
 	//SET y GET
 	public String getCedula() {
 		return cedula;

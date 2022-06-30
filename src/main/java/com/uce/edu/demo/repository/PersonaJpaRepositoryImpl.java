@@ -19,6 +19,7 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 	public Persona buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
 		return this.entityManager.find(Persona.class, id);
+		
 	}
 
 	@Override
@@ -39,5 +40,7 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 		Persona persona=this.buscarPorId(id);
 		this.entityManager.remove(persona);
 	}
+
+
 
 }
