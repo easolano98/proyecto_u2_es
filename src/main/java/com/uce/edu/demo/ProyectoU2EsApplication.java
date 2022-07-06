@@ -1,5 +1,7 @@
 package com.uce.edu.demo;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,27 +26,30 @@ public class ProyectoU2EsApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		//LOGGER.info(this.jpaService.buscarPorId(3));
+		
 
 		Persona per = new Persona();
 		//per.setId(3);
 		per.setNombre("Pamela1");
 		per.setApellido("Nogales");
+		per.setCedula("0520220");
+		per.setGenero("F");
 
+		
+		LOGGER.info(this.jpaService.buscarPorCedula("0520220"));
 		// GUARDAR
-		 this.jpaService.guardar(per);
-
-		Persona per1=new Persona();
-		per1.setId(8);
-		per1.setNombre("Wilsona");
-		per1.setApellido("Tipantaxi");
-		
-		
+		 //this.jpaService.guardar(per);
+		LOGGER.info(this.jpaService.buscarPorCedula("0520220"));
+		List<Persona>listaPersona=this.jpaService.buscarApellido("Nogales");
+		for(Persona item : listaPersona) {
+			LOGGER.info("Persona: "+item);
+		}
+//		
 		// ACTUALIZAR
 		//this.jpaService.actualizar(per1);
 
 		// ELIMINAR
-		//this.jpaService.eliminar(3);
+		//this.jpaService.eliminar(7);
 
 	}
 
