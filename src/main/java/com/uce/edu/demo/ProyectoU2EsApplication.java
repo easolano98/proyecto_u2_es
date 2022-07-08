@@ -29,22 +29,39 @@ public class ProyectoU2EsApplication implements CommandLineRunner {
 		
 
 		Persona per = new Persona();
-		//per.setId(3);
-		per.setNombre("Pamela1");
-		per.setApellido("Nogales");
-		per.setCedula("0520220");
-		per.setGenero("F");
+		per.setNombre("Omar");
+		per.setApellido("Tipan");
+		per.setCedula("1752301000");
+		per.setGenero("M");
 
+		 //GUARDAR
+//		 this.jpaService.guardar(per);
 		
+		//Buscar por Cedula
 		LOGGER.info(this.jpaService.buscarPorCedula("0520220"));
-		// GUARDAR
-		 //this.jpaService.guardar(per);
-		LOGGER.info(this.jpaService.buscarPorCedula("0520220"));
-		List<Persona>listaPersona=this.jpaService.buscarApellido("Nogales");
-		for(Persona item : listaPersona) {
-			LOGGER.info("Persona: "+item);
+		
+		LOGGER.info("/////////////////////////Buscar por Apellido//////////////////////////////////");
+		//Buscar por Apellido
+		List<Persona>listaPersonaApellido=this.jpaService.buscarApellido("Nogales");
+		for(Persona item : listaPersonaApellido) {
+			LOGGER.info("Persona por apellido: "+item);
 		}
-//		
+		
+		LOGGER.info("////////////////////////Buscar por Nombre///////////////////////////////////");
+		//Buscar por Nombre
+		List<Persona>listaPersonaNombre=this.jpaService.buscarNombre("Lucho");
+		for(Persona item : listaPersonaNombre) {
+			LOGGER.info("Persona por nombre "+item);
+		}
+		
+		LOGGER.info("////////////////////////Buscar por Genero///////////////////////////////////");
+		//Buscar por Genero
+		List<Persona>listaPersonaGenero=this.jpaService.buscarGenero("M");
+		for(Persona item : listaPersonaGenero) {
+			LOGGER.info("Persona por genero "+item);
+		}
+		
+		
 		// ACTUALIZAR
 		//this.jpaService.actualizar(per1);
 
