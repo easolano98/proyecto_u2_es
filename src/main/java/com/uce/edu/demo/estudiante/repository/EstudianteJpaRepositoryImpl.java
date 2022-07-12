@@ -44,6 +44,7 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository {
 		this.entityManager.merge(estudiante);
 	}
 	
+	
 	//Typed
 	@Override
 	public Estudiante buscarPorCarnetTyped(String numCarnet) {
@@ -61,8 +62,6 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository {
 		myTypedQuery.setParameter("datoApellido", apellido );
 		return myTypedQuery.getResultList();
 	}
-	
-	
 	
 	//Named
 	@Override
