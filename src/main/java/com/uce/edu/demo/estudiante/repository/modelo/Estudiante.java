@@ -2,23 +2,42 @@ package com.uce.edu.demo.estudiante.repository.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="estudiante")
+
+//Named
+@NamedQuery(name="Estudiante.eliminarPorNombre", query="DELETE FROM Estudiante e WHERE e.nombre= :datoNombre ")
+@NamedQuery(name="Estudiante.actualizarCarreraPorCarnet", query="UPDATE Estudiante e SET e.carrera= :datoCarrera WHERE e.numCarnet= :datoCarnet ")
+
+//Typed Named
+@NamedQuery(name="Estudiante.buscarApellidoOrden", query="SELECT e FROM Estudiante e WHERE e.apellido= :datoApellido ORDER BY e.nombre   ")
+@NamedQuery(name="Estudiante.buscarPorLetra", query="SELECT e FROM Estudiante e WHERE  e.apellido LIKE :datoLetra ")
+
+
+
 public class Estudiante {
 	
 	@Id
-	@Column(name="num_carnet")
+	@Column(name = "estu_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estu_id_seq")
+	@SequenceGenerator(name = "estu_id_seq", sequenceName = "estu_id_seq", allocationSize = 1)
+	private Integer id;
+	@Column(name="estu_num_carnet")
 	private Integer numCarnet;
-	@Column(name="cedula")
+	@Column(name="estu_cedula")
 	private String cedula;
-	@Column(name="nombre")
+	@Column(name="estu_nombre")
 	private String nombre;
-	@Column(name="apellido")
+	@Column(name="estu_apellido")
 	private String apellido;
-	@Column(name="carrera")
+	@Column(name="estu_carrera")
 	private String carrera;
 	
 	
