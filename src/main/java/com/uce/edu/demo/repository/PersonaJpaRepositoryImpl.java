@@ -6,24 +6,28 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.repository.modelo.Persona;
+
 @Repository
 @Transactional
 
 public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
-	
+
 	@PersistenceContext
-	private EntityManager entityManager;//punto de acceso a la BD
-	
+	private EntityManager entityManager;// punto de acceso a la BD
+
 	@Override
 	public Persona buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
 		return this.entityManager.find(Persona.class, id);
-		
+
 	}
 
 	@Override
@@ -41,33 +45,33 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 	@Override
 	public void eliminar(Integer id) {
 		// TODO Auto-generated method stub
-		Persona persona=this.buscarPorId(id);
+		Persona persona = this.buscarPorId(id);
 		this.entityManager.remove(persona);
 	}
 
 	@Override
 	public Persona buscarPorCedula(String cedula) {
 		// TODO Auto-generated method stub
-		Query jpqlQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.cedula = :datoCedula");
+		Query jpqlQuery = this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.cedula = :datoCedula");
 		jpqlQuery.setParameter("datoCedula", cedula);
 
-		return (Persona)jpqlQuery.getSingleResult();//Este devuelve un objeto de tipo persona;
+		return (Persona) jpqlQuery.getSingleResult();// Este devuelve un objeto de tipo persona;
 	}
 
 	@Override
 	public List<Persona> buscarApellido(String apellido) {
 		// TODO Auto-generated method stub
-		Query jpqlQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.apellido = :datoApellido");
+		Query jpqlQuery = this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.apellido = :datoApellido");
 		jpqlQuery.setParameter("datoApellido", apellido);
 
 		return jpqlQuery.getResultList();
-		
+
 	}
 
 	@Override
 	public List<Persona> buscarNombre(String nombre) {
 		// TODO Auto-generated method stub
-		Query jpqlQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.nombre= :datoNombre");
+		Query jpqlQuery = this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.nombre= :datoNombre");
 		jpqlQuery.setParameter("datoNombre", nombre);
 		return jpqlQuery.getResultList();
 	}
@@ -75,16 +79,17 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 	@Override
 	public List<Persona> buscarGenero(String genero) {
 		// TODO Auto-generated method stub
-		Query jpqlQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.genero= :datoGenero");
+		Query jpqlQuery = this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.genero= :datoGenero");
 		jpqlQuery.setParameter("datoGenero", genero);
 		return jpqlQuery.getResultList();
-		
+
 	}
 
 	@Override
-	public int actualizarPorApellido(String genero,String apellido) {
+	public int actualizarPorApellido(String genero, String apellido) {
 		// TODO Auto-generated method stub
-		Query myQuery=this.entityManager.createQuery("UPDATE Persona p SET p.genero = :datoGenero WHERE p.apellido = :datoApellido");
+		Query myQuery = this.entityManager
+				.createQuery("UPDATE Persona p SET p.genero = :datoGenero WHERE p.apellido = :datoApellido");
 		myQuery.setParameter("datoGenero", genero);
 		myQuery.setParameter("datoApellido", apellido);
 		return myQuery.executeUpdate();
@@ -93,36 +98,37 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 	@Override
 	public int eliminarPorGenero(String genero) {
 		// TODO Auto-generated method stub
-		Query myQuery=this.entityManager.createQuery("DELETE FROM Persona p WHERE p.genero = :datoGenero ");
+		Query myQuery = this.entityManager.createQuery("DELETE FROM Persona p WHERE p.genero = :datoGenero ");
 		myQuery.setParameter("datoGenero", genero);
 		return myQuery.executeUpdate();
 	}
 
-	//Consultas Typed
-	
+	// Consultas Typed
+
 	@Override
 	public Persona buscarPorCedulaTyped(String cedula) {
 		// TODO Auto-generated method stub
-		TypedQuery<Persona> myTypedQuery =this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.cedula = :datoCedula", Persona.class);
+		TypedQuery<Persona> myTypedQuery = this.entityManager
+				.createQuery("SELECT p FROM Persona p WHERE p.cedula = :datoCedula", Persona.class);
 		myTypedQuery.setParameter("datoCedula", cedula);
 		return myTypedQuery.getSingleResult();
 	}
-	
-	
-	//Consultas Named
+
+	// Consultas Named
 	@Override
 	public Persona buscarPorCedulaNamed(String cedula) {
 		// TODO Auto-generated method stub
-		Query myQuery=this.entityManager.createNamedQuery("Persona.buscarPorCedula");
+		Query myQuery = this.entityManager.createNamedQuery("Persona.buscarPorCedula");
 		myQuery.setParameter("datoCedula", cedula);
 		return (Persona) myQuery.getSingleResult();
 	}
-	
-	//Consultas Named Typed
+
+	// Consultas Named Typed
 	@Override
 	public Persona buscarPorCedulaTypedNamed(String cedula) {
 		// TODO Auto-generated method stub
-		TypedQuery<Persona> myTypedQuery=this.entityManager.createNamedQuery("Persona.buscarPorCedula", Persona.class);
+		TypedQuery<Persona> myTypedQuery = this.entityManager.createNamedQuery("Persona.buscarPorCedula",
+				Persona.class);
 		myTypedQuery.setParameter("datoCedula", cedula);
 		return myTypedQuery.getSingleResult();
 	}
@@ -130,14 +136,47 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 	@Override
 	public List<Persona> buscarPorNombreApellido(String nombre, String apellido) {
 		// TODO Auto-generated method stub
-		TypedQuery<Persona> myQuery=this.entityManager.createNamedQuery("Persona.buscarPorNombreApellido", Persona.class);
+		TypedQuery<Persona> myQuery = this.entityManager.createNamedQuery("Persona.buscarPorNombreApellido",
+				Persona.class);
 		myQuery.setParameter("datoNombre", nombre);
 		myQuery.setParameter("datoApellido", apellido);
 
 		return myQuery.getResultList();
 	}
-	
 
+	// Native
+	@Override
+	public Persona buscarPorCedulaNative(String cedula) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM persona WHERE pers_cedula= :datoCedula ",
+				Persona.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return (Persona) myQuery.getSingleResult();
+	}
 
+	// Named Native
+	@Override
+	public Persona buscarPorCedulaNamedNative(String cedula) {
+		// TODO Auto-generated method stub
+		TypedQuery<Persona> myQuery = this.entityManager.createNamedQuery("Persona.buscarPorCedulaNative",
+				Persona.class);
+		myQuery.setParameter("datoCedula", cedula);
+		return myQuery.getSingleResult();
+	}
+
+	@Override
+	public Persona buscarPorCedulaCriteriaApi(String cedula) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Persona> myQuery = myBuilder.createQuery(Persona.class);
+
+		// Root FROM
+		Root<Persona> personaRoot = myQuery.from(Persona.class);
+
+		TypedQuery<Persona> myQueryFinal= this.entityManager
+				.createQuery(myQuery.select(personaRoot).where(myBuilder.equal(personaRoot.get("cedula"), cedula)));
+
+		return myQueryFinal.getSingleResult();
+	}
 
 }

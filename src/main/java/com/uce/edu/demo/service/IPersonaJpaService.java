@@ -32,7 +32,13 @@ public interface IPersonaJpaService {
 	public Persona buscarPorCedulaNamed(String cedula);
 
 	public Persona buscarPorCedulaTypedNamed(String cedula);
-	
-	public List<Persona>buscarPorNombreApellido(String nombre, String apellido);
+
+	public List<Persona> buscarPorNombreApellido(String nombre, String apellido);
+
+	// Native Query
+	public Persona buscarPorCedulaNative(String cedula);
+
+	// Native Named Query
+	public Persona buscarPorCedulaNamedNative(String cedula);
 
 }
