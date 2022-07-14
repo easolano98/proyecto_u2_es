@@ -29,4 +29,15 @@ public interface IEstudianteJpaService {
 
 	public List<Estudiante> buscarPorLetra(String letra);
 
+	// Named Native
+
+	public Estudiante buscarPorCedulaNative(String numCedula);
+
+	public List<Estudiante> buscarPorLetraNative(String letra);
+
+	// Native
+
+	public List<Estudiante> buscarPorCarreraOrdenarPorNombre(String carrera);
+
+	public Estudiante buscarPorApellidoNombre(String apellido, String nombre);
 }

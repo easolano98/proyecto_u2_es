@@ -11,7 +11,6 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
-import com.uce.edu.demo.repository.modelo.Persona;
 
 @Repository
 @Transactional
@@ -99,6 +98,41 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository {
 		myTypedQuery.setParameter("datoLetra", letra);
 		return myTypedQuery.getResultList();
 
+	}
+	
+	//Named Native
+	@Override
+	public Estudiante buscarPorCedulaNative(String numCedula) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQueryNamedNative= this.entityManager.createNamedQuery("Estudiante.buscarPorCedulaNative", Estudiante.class);
+		myQueryNamedNative.setParameter("datoCedula", numCedula);
+		return myQueryNamedNative.getSingleResult();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorLetraNative(String letra) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQueryNamedNative= this.entityManager.createNamedQuery("Estudiante.buscarPorLetraNative", Estudiante.class);
+		myQueryNamedNative.setParameter("datoLetra", letra);
+		return myQueryNamedNative.getResultList();
+	}
+	
+	//Native
+	@Override
+	public List<Estudiante> buscarPorCarreraOrdenarPorNombre(String carrera) {
+		// TODO Auto-generated method stub
+		Query myNamedQuery =this.entityManager.createNativeQuery("SELECT * FROM estudiante WHERE estu_carrera= :datoCarrera ORDER BY estu_nombre ", Estudiante.class);
+		myNamedQuery.setParameter("datoCarrera", carrera);
+		return myNamedQuery.getResultList();
+	}
+
+	@Override
+	public Estudiante buscarPorApellidoNombre(String apellido, String nombre) {
+		// TODO Auto-generated method stub
+		Query myNamedQuery =this.entityManager.createNativeQuery("SELECT * FROM estudiante WHERE estu_apellido= :datoApellido AND estu_nombre= :datoNombre ", Estudiante.class);
+		myNamedQuery.setParameter("datoApellido", apellido);
+		myNamedQuery.setParameter("datoNombre", nombre);
+		return (Estudiante) myNamedQuery.getSingleResult();
 	}
 
 	
