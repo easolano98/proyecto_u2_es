@@ -27,7 +27,6 @@ import javax.persistence.Table;
 
 
 
-
 public class Estudiante {
 	
 	@Id
@@ -84,7 +83,7 @@ public class Estudiante {
 
 	@Override
 	public String toString() {
-		return "Estudiante [cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", numCarnet="
+		return "Estudiante [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", numCarnet="
 				+ numCarnet + ", carrera=" + carrera + "]";
 	}
 	

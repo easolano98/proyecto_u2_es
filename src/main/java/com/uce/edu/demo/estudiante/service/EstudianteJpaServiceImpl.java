@@ -95,6 +95,22 @@ public class EstudianteJpaServiceImpl implements IEstudianteJpaService {
 	public Estudiante buscarPorApellidoNombre(String apellido, String nombre) {
 		// TODO Auto-generated method stub
 		return this.estudianteJpaRepository.buscarPorApellidoNombre(apellido, nombre);
+		
+		
 	}
+
+	@Override
+	public List<Estudiante> buscarPorRangos(Integer inicio, Integer fin, String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorRangos(inicio, fin, carrera);
+	}
+
+	@Override
+	public List <Estudiante> buscarPorApellido(String apellido, String carrera) {
+		// TODO Auto-generated method stub
+		return this.estudianteJpaRepository.buscarPorApellido(apellido, carrera);
+	}
+
+	
 
 }

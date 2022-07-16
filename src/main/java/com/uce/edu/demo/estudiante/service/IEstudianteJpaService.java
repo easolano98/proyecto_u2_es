@@ -40,4 +40,9 @@ public interface IEstudianteJpaService {
 	public List<Estudiante> buscarPorCarreraOrdenarPorNombre(String carrera);
 
 	public Estudiante buscarPorApellidoNombre(String apellido, String nombre);
-}
+	
+	//Criteria API Query
+	
+		public List <Estudiante> buscarPorRangos(Integer inicio, Integer fin, String carrera );
+		
+		public List <Estudiante> buscarPorApellido(String apellido, String carrera);}
