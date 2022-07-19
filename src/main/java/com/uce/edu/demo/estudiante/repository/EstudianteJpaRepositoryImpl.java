@@ -15,6 +15,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.estudiante.repository.modelo.Estudiante;
+import com.uce.edu.demo.estudiante.repository.modelo.EstudiantePromedioEdad;
+import com.uce.edu.demo.estudiante.repository.modelo.EstudianteSencillo;
 
 @Repository
 @Transactional
@@ -171,18 +173,18 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository {
 		return myQueryFinal.getResultList();
 	}
 
-	// Consultar el apellido de un estudiante, y que si es carrera de medicina la lista ordene de forma ascencente
+	// Consultar el apellido de un estudiante, y que si es carrera de medicina la
+	// lista ordene de forma ascencente
 	// caso contrario se ordene de forma descendente
 	@Override
-	public List <Estudiante> buscarPorApellido(String apellido,String carrera) {
+	public List<Estudiante> buscarPorApellido(String apellido, String carrera) {
 		// TODO Auto-generated method stub
-		
+
 		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
 		CriteriaQuery<Estudiante> myQuery = myCriteria.createQuery(Estudiante.class);
 		Root<Estudiante> myTabla = myQuery.from(Estudiante.class);
-		Predicate buscarCedula=myCriteria.equal(myTabla.get("apellido"), apellido);
-		
-	
+		Predicate buscarCedula = myCriteria.equal(myTabla.get("apellido"), apellido);
+
 		if (carrera.equals("Medicina")) {
 			myQuery.select(myTabla).where(buscarCedula).orderBy(myCriteria.asc(myTabla.get("id")));
 
@@ -194,6 +196,29 @@ public class EstudianteJpaRepositoryImpl implements IEstudianteJpaRepository {
 		TypedQuery<Estudiante> myQueryFinal = this.entityManager.createQuery(myQuery);
 
 		return myQueryFinal.getResultList();
+	}
+
+	// Consulta con Objetos Sencillos
+	// Consultar por letra y ordenar de forma descendente
+	@Override
+	public List<EstudianteSencillo> buscarPorLetraYOrdenarSencillo(String letra) {
+		// TODO Auto-generated method stub
+		TypedQuery<EstudianteSencillo> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.estudiante.repository.modelo.EstudianteSencillo(e.apellido, e.cedula, e.id) FROM Estudiante e WHERE e.apellido LIKE :datoLetra ORDER BY e.id DESC",
+				EstudianteSencillo.class);
+		myQuery.setParameter("datoLetra", letra);
+		return myQuery.getResultList();
+	}
+
+	// Consultar el promedio de las edades de los estudiantes por carrera
+	@Override
+	public List<EstudiantePromedioEdad> buscarEdadPromedioPorCarrera() {
+		// TODO Auto-generated method stub
+		TypedQuery<EstudiantePromedioEdad> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.estudiante.repository.modelo.EstudianteContador(e.carrera, AVG(e.edad)) FROM Estudiante e GROUP BY e.carrera ORDER BY e.carrera ASC",
+				EstudiantePromedioEdad.class);
+
+		return myQuery.getResultList();
 	}
 
 }

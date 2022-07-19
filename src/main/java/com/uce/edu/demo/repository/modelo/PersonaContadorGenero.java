@@ -2,9 +2,9 @@ package com.uce.edu.demo.repository.modelo;
 
 import java.io.Serializable;
 
-public class PersonaContadorGenero implements Serializable{
-	
-	private static final long serialVersionUID= 1L;
+public class PersonaContadorGenero implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String genero;
 
@@ -20,8 +20,6 @@ public class PersonaContadorGenero implements Serializable{
 		this.numero = numero;
 	}
 
-	
-	
 	// SET y GET
 
 	@Override
