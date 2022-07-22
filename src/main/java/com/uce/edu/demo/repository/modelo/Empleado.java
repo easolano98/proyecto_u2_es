@@ -30,7 +30,6 @@ public class Empleado {
 	@JoinColumn(name="empl_id_ciudadano")
 	private Ciudadano ciudadano;
 
-
 	
 	//SET y GET
 	

@@ -1,5 +1,6 @@
 package com.uce.edu.demo.estudiante.repository.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -45,7 +47,18 @@ public class Estudiante {
 	@Column(name = "estu_edad")
 	private Integer edad;
 
+	@OneToOne(mappedBy = "estudiante", cascade = CascadeType.ALL)
+	private Becado becados;
+
 	// SET y GET
+	public Becado getBecados() {
+		return becados;
+	}
+
+	public void setBecados(Becado becados) {
+		this.becados = becados;
+	}
+
 	public String getCedula() {
 		return cedula;
 	}
