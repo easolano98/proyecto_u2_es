@@ -17,8 +17,8 @@ import javax.persistence.Table;
 public class CiudadanoPasaporte {
 	@Id
 	@Column(name = "ciud_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ciud_id_seq")
-	@SequenceGenerator(name = "ciud_id_seq", sequenceName = "ciud_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ciudp_id_seq")
+	@SequenceGenerator(name = "ciudp_id_seq", sequenceName = "ciudp_id_seq", allocationSize = 1)
 	private Integer id;
 	@Column(name = "ciud_nombre")
 	private String nombre;
@@ -92,7 +92,7 @@ public class CiudadanoPasaporte {
 	@Override
 	public String toString() {
 		return "CiudadanoPasaporte [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
-				+ ", fechaNacimiento=" + fechaNacimiento + ", pasaporte=" + pasaporte + "]";
+				+ ", fechaNacimiento=" + fechaNacimiento  + "]";
 	}
 
 }

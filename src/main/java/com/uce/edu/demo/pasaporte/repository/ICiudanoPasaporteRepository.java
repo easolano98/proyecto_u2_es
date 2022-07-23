@@ -12,5 +12,7 @@ public interface ICiudanoPasaporteRepository {
 	
 	public CiudadanoPasaporte buscarPorId (Integer id);
 	
+	public int eliminarPorCed (String cedula);
+	
 	public CiudadanoPasaporte buscar (String cedula);
 }

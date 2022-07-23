@@ -11,4 +11,7 @@ public interface ICiudadanoPasaporteService {
 	public void eliminar (Integer id);
 	
 	public CiudadanoPasaporte buscar (String cedula);
+
+	public int eliminarPorCed (String cedula);
+
 }

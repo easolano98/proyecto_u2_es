@@ -51,4 +51,15 @@ public class CiudadanoPasaporteRepositoryImpl implements ICiudanoPasaporteReposi
 		return this.entityManager.find(CiudadanoPasaporte.class, id);
 	}
 
+	@Override
+	public int eliminarPorCed(String cedula) {
+		// TODO Auto-generated method stub
+		Query myQuery =this.entityManager.createQuery("DELETE FROM CiudadanoPasaporte cp WHERE cp.cedula= :datoCedula ");
+		myQuery.setParameter("datoCedula", cedula);
+		return myQuery.executeUpdate();
+	}
+
+	
+	
+	
 }

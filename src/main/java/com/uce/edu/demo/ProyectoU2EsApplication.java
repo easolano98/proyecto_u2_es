@@ -1,23 +1,25 @@
 package com.uce.edu.demo;
 
-import java.time.LocalDateTime;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.pasaporte.repository.modelo.CiudadanoPasaporte;
-import com.uce.edu.demo.pasaporte.repository.modelo.Pasaporte;
-import com.uce.edu.demo.pasaporte.service.ICiudadanoPasaporteService;
+import com.uce.edu.demo.repository.modelo.onetoone.Habitacion;
+import com.uce.edu.demo.repository.modelo.onetoone.Hotel;
+import com.uce.edu.demo.service.IHabitacionService;
+import com.uce.edu.demo.service.IHotelService;
 
 @SpringBootApplication
 public class ProyectoU2EsApplication implements CommandLineRunner {
 	private static final Logger LOGGER = Logger.getLogger(ProyectoU2EsApplication.class);
 
 	@Autowired
-	private ICiudadanoPasaporteService ciudadanoPasaporteService;
+	private IHotelService hotelService;
+	
+	@Autowired
+	private IHabitacionService habitacionService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2EsApplication.class, args);
@@ -26,52 +28,29 @@ public class ProyectoU2EsApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		CiudadanoPasaporte ciud1=new CiudadanoPasaporte();
-//		
-		ciud1.setNombre("Billy");
-		ciud1.setApellido("Perez");
-		ciud1.setCedula("1511720211");
-		ciud1.setFechaNacimiento(LocalDateTime.of(1985, 3,15,11,20,2));
-		
-		Pasaporte pase1=new Pasaporte();
-		pase1.setNumero("3000");
-		pase1.setFechaEmision(LocalDateTime.now());
-		pase1.setFechaCaducidad(LocalDateTime.of(2027, 11,11,18,20,2));
-		pase1.setCiudadanoPasaporte(ciud1);
-		
-		ciud1.setPasaporte(pase1);
-		LOGGER.info("Se creo ciudadano");
-		this.ciudadanoPasaporteService.insertar(ciud1);
-
-
-		LOGGER.info("Se actualizo ciudadano");
-		CiudadanoPasaporte ciud2=new CiudadanoPasaporte();
-		ciud2.setId(14);
-		ciud2.setNombre("Paulina");
-		ciud2.setApellido("Tamyo");
-		ciud2.setCedula("15202311");
-		ciud2.setFechaNacimiento(LocalDateTime.of(2000, 3,15,11,20,2));
-		
-		Pasaporte pase2=new Pasaporte();
-		pase2.setId(14);
-		pase2.setNumero("0009");
-		pase2.setFechaEmision(LocalDateTime.now());
-		pase2.setFechaCaducidad(LocalDateTime.of(2022, 12,11,18,20,2));
-		pase2.setCiudadanoPasaporte(ciud2);
-		
-		ciud2.setPasaporte(pase2);
-		
-		this.ciudadanoPasaporteService.actualizar(ciud2);
-//		
-		
-		CiudadanoPasaporte ciud=this.ciudadanoPasaporteService.buscar("1500080211");
-		LOGGER.info("Busqueda del ciudadano "+ciud);
-		
-		LOGGER.info("Se elimino ciudadano");
-		this.ciudadanoPasaporteService.eliminar(9);
+		Hotel hotel1=new Hotel();
+		hotel1.setNombre("Hilton Colon Guy");
+		hotel1.setDireccion("Malecon");
 		
 		
 		
+		this.hotelService.insertar(hotel1);
+		Hotel hote=new Hotel();
+		hote.setId(1);
+		
+		Habitacion habit1=new Habitacion();
+		habit1.setNumero("A234");
+		habit1.setPiso("10");
+		habit1.setTipo("Familiar");
+		habit1.setHotel(hote);
+		this.habitacionService.insertar(habit1);
+		
+		Habitacion habit2=new Habitacion();
+		habit2.setNumero("A234");
+		habit2.setPiso("1");
+		habit2.setTipo("Matrimonial");
+		habit2.setHotel(hote);
+		this.habitacionService.insertar(habit2);
 		
 	}
 }

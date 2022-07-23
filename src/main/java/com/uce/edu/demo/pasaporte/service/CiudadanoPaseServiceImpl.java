@@ -37,6 +37,12 @@ public class CiudadanoPaseServiceImpl implements ICiudadanoPasaporteService {
 		this.ciudanoPasaporteRepository.eliminar(id);
 	}
 
+	@Override
+	public int eliminarPorCed(String cedula) {
+		// TODO Auto-generated method stub
+		return this.ciudanoPasaporteRepository.eliminarPorCed(cedula);
+	}
+
 	
 	
 

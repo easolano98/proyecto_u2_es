@@ -75,4 +75,11 @@ public class Pasaporte {
 		this.ciudadanoPasaporte = ciudadanoPasaporte;
 	}
 
+	@Override
+	public String toString() {
+		return "Pasaporte [id=" + id + ", numero=" + numero + ", fechaEmision=" + fechaEmision + ", fechaCaducidad="
+				+ fechaCaducidad + ", ciudadanoPasaporte=" + ciudadanoPasaporte + "]";
+	}
+
+	
 }
