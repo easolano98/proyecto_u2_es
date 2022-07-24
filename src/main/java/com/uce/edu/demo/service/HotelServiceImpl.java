@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.uce.edu.demo.repository.IHabitacionRepository;
 import com.uce.edu.demo.repository.IHotelRepository;
-import com.uce.edu.demo.repository.modelo.onetoone.Habitacion;
-import com.uce.edu.demo.repository.modelo.onetoone.Hotel;
+import com.uce.edu.demo.repository.modelo.onetomany.Habitacion;
+import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
 
 @Service
 public class HotelServiceImpl implements IHotelService {
@@ -28,7 +28,7 @@ public class HotelServiceImpl implements IHotelService {
 		this.hotelRepository.insertar(hotel);
 
 		// Buscar el hotel
-		String numero = hotel.getNombre();
+		String numero = hotel.getNombre(); 
 		Hotel hotelBuscar = null;
 		for (Habitacion habiItem : habitaciones) {
 			habiItem.setHotel(hotelBuscar);

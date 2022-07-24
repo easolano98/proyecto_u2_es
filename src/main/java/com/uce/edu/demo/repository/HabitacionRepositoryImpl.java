@@ -6,7 +6,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.repository.modelo.onetoone.Habitacion;
+import com.uce.edu.demo.repository.modelo.onetomany.Habitacion;
 
 @Repository
 @Transactional
