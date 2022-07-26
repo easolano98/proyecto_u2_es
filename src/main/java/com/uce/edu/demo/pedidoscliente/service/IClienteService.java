@@ -1,5 +1,7 @@
 package com.uce.edu.demo.pedidoscliente.service;
 
+import java.util.List;
+
 import com.uce.edu.demo.pedidoscliente.repository.modelo.Cliente;
 
 public interface IClienteService {
@@ -12,4 +14,5 @@ public interface IClienteService {
 	
 	public void eliminar(Integer id);
 	
+	public List<Cliente> buscarCedula(String cedula);
 }

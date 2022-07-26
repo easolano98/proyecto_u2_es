@@ -1,6 +1,9 @@
 package com.uce.edu.demo.pedidoscliente.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,15 @@ public class ClienteRepositoryImpl implements IClienteRepository {
 		// TODO Auto-generated method stub
 		Cliente cliente=this.buscar(id);
 		this.entityManager.remove(cliente);
+	}
+
+	@Override
+	public List<Cliente> buscarCedula(String cedula) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createQuery("SELECT c FROM Cliente c WHERE c.cedula= :datoCedula");
+		myQuery.setParameter("datoCedula", cedula);
+		
+		return myQuery.getResultList();
 	}
 
 }

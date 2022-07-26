@@ -28,7 +28,7 @@ public class Cliente {
 	@Column(name="clie_telefono")
 	private String telefono;
 	
-	@OneToMany(mappedBy = "cliente", cascade= CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
 
 	// SET y GET

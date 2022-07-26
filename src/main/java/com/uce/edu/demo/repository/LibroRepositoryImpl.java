@@ -6,21 +6,19 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
+import com.uce.edu.demo.repository.modelo.manytomany.Libro;
 
 @Repository
 @Transactional
-public class HotelRepositoryImpl implements IHotelRepository {
+public class LibroRepositoryImpl implements ILibroRepository {
 
 	@Autowired
 	private EntityManager entityManager;
-
+	
 	@Override
-	public void insertar(Hotel hotel) {
+	public void insertar(Libro libro) {
 		// TODO Auto-generated method stub
-
-		this.entityManager.persist(hotel);
-
+		this.entityManager.persist(libro);
 	}
-
+	
 }
