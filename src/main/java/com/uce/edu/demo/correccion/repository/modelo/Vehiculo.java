@@ -1,12 +1,14 @@
 package com.uce.edu.demo.correccion.repository.modelo;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,6 +28,11 @@ public class Vehiculo {
 	private String tipo;
 	@Column(name="pers_precio")
 	private BigDecimal precio;
+	
+	@OneToMany(mappedBy = "vehiculo")
+	private List<Matricula> matriculas;
+	
+	
 	//Set y Get
 	public String getMarca() {
 		return marca;
@@ -61,6 +68,12 @@ public class Vehiculo {
 	@Override
 	public String toString() {
 		return "Vehiculo [marca=" + marca + ", placa=" + placa + ", tipo=" + tipo + ", precio=" + precio + "]";
+	}
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 	
 	

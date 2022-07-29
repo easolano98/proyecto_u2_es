@@ -9,25 +9,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name="matricula")
+@Entity
+@Table(name = "matricula")
 public class Matricula {
-//	@Id
-//	@Column(name="matr_id")
-//	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="matr_id_seq")
-//	@SequenceGenerator (name="matr_id_seq", sequenceName="matr_id_seq", allocationSize = 1)
+	@Id
+	@Column(name = "matr_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matr_id_seq")
+	@SequenceGenerator(name = "matr_id_seq", sequenceName = "matr_id_seq", allocationSize = 1)
 	private Integer idMatricula;
-	// @Column(name="matr_fecha")
+	@Column(name = "matr_fecha")
 	private LocalDateTime fechaMatricula;
-	// @Column(name="matr_valor_matricula")
+	@Column(name = "matr_valor_matricula")
 	private BigDecimal valorMatricula;
-	// @Column(name="matr_propietario")
-	private Propietario propietario;
-	// @Column(name="matr_vehiculo")
+
+	@ManyToOne()
+	@JoinColumn(name = "matr_vehi_id")
 	private Vehiculo vehiculo;
+
+	@ManyToOne()
+	@JoinColumn(name = "matr_prop_id")
+	private Propietario propietario;
 
 	// SET y GET
 	public LocalDateTime getFechaMatricula() {
@@ -72,8 +78,7 @@ public class Matricula {
 
 	@Override
 	public String toString() {
-		return "Matricula [fechaMatricula=" + fechaMatricula + ", valorMatricula=" + valorMatricula + ", propietario="
-				+ propietario + ", vehiculo=" + vehiculo + "]";
+		return "Matricula [fechaMatricula=" + fechaMatricula + ", valorMatricula=" + valorMatricula + "]";
 	}
 
 }

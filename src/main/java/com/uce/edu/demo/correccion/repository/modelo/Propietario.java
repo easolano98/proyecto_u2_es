@@ -1,10 +1,13 @@
 package com.uce.edu.demo.correccion.repository.modelo;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 @Entity
@@ -21,6 +24,14 @@ public class Propietario {
 	private String apellido;
 	@Column(name="prop_cedula")
 	private String cedula;
+	
+	
+	@OneToMany(mappedBy = "propietario")
+	private List<Matricula> matriculas ;
+	
+	
+	
+	
 	//Set y Get
 	public String getNombre() {
 		return nombre;
